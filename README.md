@@ -11,8 +11,8 @@
 - 四川民族学院 - 数据科学与大数据技术（本科）
 - 两段企业实习，参与多个真实业务系统开发
 - 专注方向：
-  - AI 应用工程（RAG / Text-to-SQL / Agent）
-  - Python 后端架构（FastAPI / 异步 / WebSocket）
+  - AI 应用工程（RAG / Text-to-SQL / Agent / 多智能体）
+  - Python 后端架构（FastAPI / 异步 / 微服务 / 高并发）
   - 数据系统 & 数据分析
 
 ---
@@ -21,23 +21,21 @@
 
 ### 后端开发
 
-- Python / FastAPI / Django / Flask
-- RESTful API 设计 / WebSocket 实时通信
-- RBAC 权限系统 / 微服务接口设计
-- AsyncIO 异步编程 / 高并发系统设计
+- Python / FastAPI / Django / AsyncIO 异步编程
+- RESTful API / WebSocket 实时通信
+- 微服务架构 / RBAC 权限系统
 
 ### AI 应用开发
 
-- RAG（LangChain） / Text-to-SQL / AI Agent
-- MCP 工具调用 / Skills 技能系统
-- LLM 集成（OpenAI / Ollama）
-- 对话记忆 / Prompt Engineering
+- RAG（LangChain）/ Text-to-SQL / AI Agent / 多智能体系统
+- MCP 工具调用 / Prompt Engineering
+- LLM 集成（OpenAI / Anthropic / Ollama）
 
 ### 数据与存储
 
 - MySQL / PostgreSQL / Redis
-- pgvector 向量数据库 / SQLite
-- Hive / HDFS
+- pgvector 向量检索 / Kafka 消息队列
+- 多级缓存设计（L1/L2）
 
 ### 多模态能力
 
@@ -47,97 +45,105 @@
 
 ### 工程能力
 
-- Docker 容器化部署
-- Git 协作开发
-- 前后端分离架构
-- 系统日志 & 监控设计
+- Docker 容器化部署 / Docker Compose 编排
+- Git 协作开发 / 前后端分离架构
+- 数据库设计 / 索引优化 / 性能调优
 
 ---
 
 ## 核心项目
 
+### Synapse - 多智能体 AI 应用平台
+
+> 面向复杂任务的多智能体 AI 平台，支持任务规划、RAG 检索与工具调用
+
+**GitHub: [LongJie686/synapse](https://github.com/LongJie686/synapse)**
+
+- 多智能体编排：Supervisor / Parallel / Hierarchical / Collaboration 四种模式 + Plan-Execute
+- RAG 系统：文档解析 → 分块 → 向量化 → 检索 → 上下文注入（支持 5+ 文档格式）
+- 成本优化：cost-aware routing + 自动降级 + 上下文压缩，Token 消耗降低约 40%~60%
+- 记忆系统：短期对话 + 长期向量存储 + 用户画像，支持跨会话上下文
+- 工具调用：基于 MCP 协议实现 15+ 工具接入与动态扩展
+
+**关键词：Multi-Agent / RAG / LangChain / pgvector**
+
+### 电商推荐系统（微服务架构）
+
+> 基于微服务架构的电商推荐系统，支持高并发访问与推荐计算场景
+
+**GitHub: [LongJie686/ecommerce-microservices](https://github.com/LongJie686/ecommerce-microservices)**
+
+- 微服务架构：API 网关 + 用户 + 商品 + 推荐 + 爬虫 + 数据分析 6 个服务独立部署
+- 高并发优化：L1 本地缓存 + L2 Redis 多级缓存，P90 延迟 42ms，较无缓存降低约 80%
+- 系统稳定性：JWT 鉴权 + 限流（Redis + Lua）+ 熔断降级（Circuit Breaker）
+- 数据管道：Kafka 异步消息 + 布隆过滤去重 + 行为日志处理
+- 推荐策略：协同过滤 + 内容推荐 + 热度加权混合策略，支持 AB 测试分流
+- 数据库优化：复合索引 + 覆盖索引 + EXPLAIN 调优
+
+**关键词：微服务 / 高并发 / Redis 缓存 / Kafka / 推荐系统**
+
 ### 智能问数系统（ChatBI）
 
-> 企业级 AI 数据分析平台：自然语言 -> SQL -> 可视化
+> 企业级 AI 数据分析平台：自然语言 → SQL → 可视化
 
 - 多数据源支持（MySQL / PostgreSQL / ClickHouse 等）
 - Text-to-SQL 智能查询引擎
-- AI 看板（ECharts / AntV）
-- 企业微信 OAuth 集成 + 权限体系
+- AI 看板（ECharts / AntV）+ PPT 导出
+- 企业微信 OAuth 集成 + 数据权限隔离
 
 **关键词：RAG / Text-to-SQL / 数据分析平台**
-
-### 链路健康监测系统（LinkMon）
-
-> 实时链路监测 + 健康评分 + 告警系统
-
-- iperf3 带宽 / 丢包 / 抖动实时测量
-- SNMP v1/v2c/v3 + TRAP 告警
-- 多链路并发监测 + 可视化看板
-- Docker 一键部署
-
-**关键词：网络监控 / 高并发 / 实时系统**
 
 ### AI 数字人交互系统
 
 > 多模态 AI 实时交互平台（语音 + 情感 + 动作）
 
+- STT → LLM → 情感分析 → 动作控制 → TTS 全链路
+- WebSocket 实时通信（100+ 并发）
 - 8+ STT 引擎 + 10+ TTS 引擎集成
-- WebSocket 实时通信（100+并发）
-- 情感分析 + Live2D 动作控制
-- 对话记忆 + MCP 工具调用
+- Live2D 动作控制 + 对话记忆
 
 **关键词：多模态 AI / 实时交互 / Agent**
-
-### 电商数据分析平台
-
-> 商品信息采集 + 数据仓库 + 智能分析
-
-- 日处理数据 10万+（爬虫 + ETL）
-- MySQL + Hive 混合存储架构
-- AI 问答 + 数据可视化
-- 个性化推荐引擎
-
-**关键词：数据仓库 / ETL / 数据分析**
 
 ---
 
 ## 在线知识库
 
-我的技术沉淀（持续更新）
-https://longjie686.github.io/backend-notes/
+持续更新的技术沉淀：[longjie686.github.io/backend-notes](https://longjie686.github.io/backend-notes/)
 
 内容涵盖：
 
-- 后端架构设计
-- AI 应用开发（RAG / Agent）
-- 数据库 & 性能优化
-- 数据分析 & 可视化
+- 后端架构设计 & 高并发系统
+- AI 应用开发（RAG / Agent / 多智能体）
+- 数据库 & 性能优化（MySQL / Redis）
+- 微服务架构设计
 
 ---
 
 ## 实习经历
 
-**成都矢量科技有限公司**
+**成都矢量科技有限公司**（2025.10 - 2026.03）
 
-- 智能问数系统（ChatBI）
-- 链路健康监测系统（LinkMon）
-- 错误根因分析系统（气象局）
+- 智能问数系统（ChatBI）：NL2SQL + 多数据源 + AI 看板
+- 链路健康监测系统（LinkMon）：iperf3 + SNMP + 告警
+- 错误根因分析系统：配置化诊断流程 + 故障定位
 
-**四川奇点引擎科技有限公司**
+**四川奇点引擎科技有限公司**（2025.07 - 2025.10）
 
-- AI 数字人交互系统
-- 智能印刷管理系统（CRM + AI）
+- AI 数字人交互系统：全链路多模态交互
+- 智能印刷管理系统（CRM + AI）：日处理订单 200+
 
 ---
 
 ## 联系方式
 
 - Email: longchengjie686@gmail.com
-- GitHub: https://github.com/LongJie686
+- GitHub: [github.com/LongJie686](https://github.com/LongJie686)
+- 知识库: [longjie686.github.io/backend-notes](https://longjie686.github.io/backend-notes/)
 
 ---
 
 ## 自我评价
 
-具备扎实的 Python 后端开发能力和 AI 应用工程经验，参与多个企业级系统落地，熟悉 RAG、Text-to-SQL、多模态交互等 AI 场景。具备良好的系统设计能力与问题排查能力，能够在复杂系统中快速定位问题并优化。
+具备 AI 应用系统与后端工程的综合能力，能够独立完成从系统设计、模型集成到工程落地的完整开发流程。在多智能体系统、RAG、Text-to-SQL 等方向有实际项目经验，具备较强的工程实现能力与性能优化意识（缓存、异步、消息队列等）。
+
+有良好的问题拆解能力与技术自驱力，长期跟进前沿技术，持续总结 AI 应用与后端架构实践。
